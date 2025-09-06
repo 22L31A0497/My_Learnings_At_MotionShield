@@ -1,4 +1,4 @@
-Welcome! 👋 This guide explains the foundational topics in Deep Learning, Machine Learning, and Computer Vision that are essential for understanding and working with instance segmentation models like YOLOv8m. It’s written in easy-to-understand words so even beginners can follow along. Each section has:
+Welcome! This guide explains the foundational topics in Deep Learning, Machine Learning, and Computer Vision that are essential for understanding and working with instance segmentation models like YOLOv8m. It’s written in easy-to-understand words so even beginners can follow along. Each section has:
 
 Simple explanation
 
@@ -9,7 +9,7 @@ Best YouTube resource link
 ---
 # Digital Image Basics and OpenCV Python
 
-This repository summarizes key concepts and tutorials related to digital images, pixels, resolution, and color channel manipulation using OpenCV in Python. It is designed to help beginners and intermediate learners understand how images are represented, processed, and manipulated programmatically.
+  This topic summarizes key concepts and tutorials related to digital images, pixels, resolution, and color channel manipulation using OpenCV in Python. It is designed to help beginners and intermediate learners understand how images are represented, processed, and manipulated programmatically.
 
 ---
 
@@ -91,7 +91,7 @@ An introduction to pixels as the fundamental unit of digital images.
 - [Digital Images - Computerphile](https://www.youtube.com/watch?v=06OHflWNCOE)
 - [What Is A Pixel In Computer Graphics](https://m.youtube.com/watch?v=wh54cmWLdHQ)
 
-##  Creating pure red, green, and blue images using NumPy and OpenCV
+##  Code for Creating pure red, green, and blue images using NumPy and OpenCV
 
 ```python
 
@@ -153,6 +153,72 @@ plt.show()
 
 
 ```
+### Sample Output which having Original Image, Blue Channel Image, Green Channel Image, Red Channel Image
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/01ee26fbefd94018a4f57c1e0ba67ba4329b0a7e/IMG-20250906-WA0012.jpg)
+
+##  Code for Creating Grayscale Image, Heatmap (Pixel Intensity), Low-level Computer Vision
+```python
+# Install required libraries
+!pip install opencv-python matplotlib
+
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+from google.colab import files
+
+# Upload an image
+uploaded = files.upload()
+image_path = list(uploaded.keys())[0]
+
+# Read image in BGR format
+img_bgr = cv2.imread(image_path)
+
+# Convert BGR to RGB
+img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+# Convert to Grayscale (intensity only)
+img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+
+# Heatmap of grayscale (computer-style visualization)
+img_heatmap = cv2.applyColorMap(img_gray, cv2.COLORMAP_JET)
+
+# Pixelated image (downscale then upscale)
+h, w = img_gray.shape
+scale = 16  # adjust for blocky view
+small = cv2.resize(img_rgb, (w//scale, h//scale), interpolation=cv2.INTER_LINEAR)
+img_pixelated = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
+
+# Plot results
+plt.figure(figsize=(15,10))
+
+plt.subplot(2,2,1)
+plt.imshow(img_rgb)
+plt.title("Original Image")
+plt.axis("off")
+
+plt.subplot(2,2,2)
+plt.imshow(img_gray, cmap="gray")
+plt.title("Grayscale (Computer Intensity View)")
+plt.axis("off")
+
+plt.subplot(2,2,3)
+plt.imshow(cv2.cvtColor(img_heatmap, cv2.COLOR_BGR2RGB))
+plt.title("Heatmap (Pixel Intensity)")
+plt.axis("off")
+
+plt.subplot(2,2,4)
+plt.imshow(img_pixelated)
+plt.title("Pixelated View (Low-level Computer Vision)")
+plt.axis("off")
+
+plt.show()
+
+```
+### Sample Output which having Original Image, Grayscale Image, Heatmap (Pixel Intensity), Low-level Computer Vision
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/01ee26fbefd94018a4f57c1e0ba67ba4329b0a7e/IMG-20250906-WA0011.jpg)
+
 
 
 # Segmentation Concepts and Tutorials with YOLOv8 and Binary Masks
