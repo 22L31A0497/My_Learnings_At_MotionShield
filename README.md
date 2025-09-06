@@ -334,6 +334,9 @@ plt.show()
 ```
 ---
 
+### Sample Output
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/895171305a6bd6608d8b2b3130db7c4278148242/IMG-20250906-WA0013.jpg)
+
 ## 5. Additional Resources
 
 - [Instance segmentation YOLO v8 | OpenCV with Python tutorial](https://www.youtube.com/watch?v=cHOOnb_o8ug)
