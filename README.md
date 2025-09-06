@@ -5,6 +5,7 @@ Simple explanation
 Python code example
 
 Best YouTube resource link
+
 ---
 # Digital Image Basics and OpenCV Python
 
