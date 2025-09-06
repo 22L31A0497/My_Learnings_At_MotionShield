@@ -91,6 +91,7 @@ An introduction to pixels as the fundamental unit of digital images.
 - [Digital Images - Computerphile](https://www.youtube.com/watch?v=06OHflWNCOE)
 - [What Is A Pixel In Computer Graphics](https://m.youtube.com/watch?v=wh54cmWLdHQ)
 
+##  Creating pure red, green, and blue images using NumPy and OpenCV
 
 ```python
 
@@ -153,43 +154,6 @@ plt.show()
 
 ```
 
-### Binary Mask: Used in segmentation 
-
-
-```python
-
-
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-from google.colab import files
-
-# Upload an image
-uploaded = files.upload()
-image_path = list(uploaded.keys())[0]
-
-# Read image
-img_bgr = cv2.imread(image_path)
-
-# Convert to grayscale
-gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
-
-# Apply threshold to create binary mask (0s and 1s only)
-_, binary_mask = cv2.threshold(gray, 127, 1, cv2.THRESH_BINARY)
-
-# Plot the binary mask with numbers (0 and 1 displayed)
-plt.figure(figsize=(8,8))
-plt.imshow(binary_mask, cmap='gray')
-plt.title("Binary Mask (0s and 1s)")
-plt.axis("off")
-
-# Annotate each pixel with its value (0 or 1)
-for (i, j), val in np.ndenumerate(binary_mask[::10, ::10]):  # step=10 to avoid crowding
-    plt.text(j*10, i*10, str(val), ha='center', va='center', color='red', fontsize=6)
-
-plt.show()
-
-```
 
 # Segmentation Concepts and Tutorials with YOLOv8 and Binary Masks
 
@@ -331,6 +295,43 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
+### Binary Mask: Used in segmentation complete code you can test with your own images
+
+
+```python
+
+
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+from google.colab import files
+
+# Upload an image
+uploaded = files.upload()
+image_path = list(uploaded.keys())[0]
+
+# Read image
+img_bgr = cv2.imread(image_path)
+
+# Convert to grayscale
+gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+
+# Apply threshold to create binary mask (0s and 1s only)
+_, binary_mask = cv2.threshold(gray, 127, 1, cv2.THRESH_BINARY)
+
+# Plot the binary mask with numbers (0 and 1 displayed)
+plt.figure(figsize=(8,8))
+plt.imshow(binary_mask, cmap='gray')
+plt.title("Binary Mask (0s and 1s)")
+plt.axis("off")
+
+# Annotate each pixel with its value (0 or 1)
+for (i, j), val in np.ndenumerate(binary_mask[::10, ::10]):  # step=10 to avoid crowding
+    plt.text(j*10, i*10, str(val), ha='center', va='center', color='red', fontsize=6)
+
+plt.show()
+
+```
 ---
 
 ## 5. Additional Resources
@@ -456,10 +457,3 @@ model.train(data="dataset.yaml", epochs=60, imgsz=640)
 This section equips you with foundational knowledge to understand and control the training process of machine learning models. By mastering epochs, batch size, loss functions, and recognizing fitting issues, you can build robust models that generalize well.
 
 ---
-
-## ✅ How to Use This Guide
-
-1. Read each section carefully.
-2. Run the code examples with your own images.
-3. Watch the YouTube videos for better visualization.
-4. Use this as a **reference guide for Stage 1 project work**.
