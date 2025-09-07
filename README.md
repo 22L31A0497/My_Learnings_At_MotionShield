@@ -628,6 +628,18 @@ Understanding these formats is foundational for image processing, computer visio
 
 ***
 
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0010.jpg)
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0007.jpg)
+
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0013.jpg)
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0011.jpg)
+
+
+
 ## 🖼️ Image Preprocessing: Normalize Pixel Values and Add Extra Dimension
 
 ### 🎯 Objective of the Video
@@ -777,6 +789,15 @@ To prepare raw data for machine learning by cleaning, transforming, and encoding
    - Box plots to detect outliers visually
    - Scatter plots to explore relationships between features and target variable
    - Heatmaps to visualize correlation matrix and identify strong relationships
+  
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0012.jpg)
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0009.jpg)
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0008.jpg)
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/e955266d287f2f0005a91662ca8c4d03b7ce8104/IMG-20250907-WA0006.jpg)
 
 ### 🧩 Data Cleaning & Transformation
 
