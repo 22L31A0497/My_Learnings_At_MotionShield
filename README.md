@@ -864,6 +864,8 @@ After preprocessing:
   - **Output Layer**: Produces the final prediction or classification result.
 - Data flows from one layer to the next in a process called **forward propagation**.
 
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/7af291eee33806f3b8d08895dcc5f48ad741d90a/Screenshot%202025-09-07%20173723.png)
+
 ### 3. Neurons and Data Flow
 - Each neuron receives inputs, multiplies them by **weights**, adds a **bias**, and passes the result through an **activation function**.
 - Example: Inputs like age, experience, and education level are processed to predict salary.
@@ -879,6 +881,8 @@ After preprocessing:
 - During training, weights are adjusted to minimize prediction error.
 - **Weights are learnable parameters**—they change during training.
 
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/7af291eee33806f3b8d08895dcc5f48ad741d90a/Screenshot%202025-09-07%20175101.png)
+
 ### 5. Bias
 - Bias is a constant added to the weighted sum of inputs.
 - It allows the model to shift the activation threshold and adds flexibility.
@@ -888,12 +892,16 @@ After preprocessing:
 - **Bias is also a learnable parameter**—it gets updated during training.
 - Bias ensures that even when all inputs are zero, the neuron can still activate.
 
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/7af291eee33806f3b8d08895dcc5f48ad741d90a/Screenshot%202025-09-07%20175115.png)
+
 ### 6. Activation Functions
 - After computing the weighted sum and adding bias, the result is passed through an activation function.
 - Activation functions introduce **non-linearity** into the network.
 - Without them, the network would behave like a linear regression model.
 - They determine whether a neuron should be activated and normalize the output to a specific range (e.g., 0–1 or -1 to 1).
 - **Activation functions are not learnable**—they are fixed during model design.
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/7af291eee33806f3b8d08895dcc5f48ad741d90a/Screenshot%202025-09-07%20175204.png)
 
 #### Common Activation Functions:
 - **Binary Step Function**:
@@ -1202,6 +1210,9 @@ After preprocessing:
   - Low accuracy across datasets.
 - Example: Trying to fit a straight line to data that clearly follows a curve.
 
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/9f0c8890cc752c2b0a61595da60bb006f010b2e6/Screenshot%202025-09-07%20194335.png)
+
 ### 3. What is Overfitting?
 - Overfitting happens when a model learns not only the underlying patterns but also the noise in the training data.
 - It performs very well on training data but poorly on test data.
@@ -1214,6 +1225,8 @@ After preprocessing:
   - High variance.
   - Large gap between training and test accuracy.
 - Example: A model that fits every data point perfectly but fails to predict new data correctly.
+
+![image_alt](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/9f0c8890cc752c2b0a61595da60bb006f010b2e6/Screenshot%202025-09-07%20194446.png)
 
 ### 4. Bias-Variance Tradeoff
 - Bias refers to error due to overly simplistic assumptions in the model.
