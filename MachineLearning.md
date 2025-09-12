@@ -650,3 +650,768 @@ Predict whether a flower belongs to species A or B based on petal length and wid
 - Sensitive to feature scaling and irrelevant features.
 - $$K$$ controls bias-variance tradeoff (small $$K$$ = high variance, large $$K$$ = high bias).
 - Commonly used for simple classification problems.
+
+***
+
+# Decision Tree Algorithms
+
+***
+
+## Types of Decision Tree Algorithms
+
+1. **Decision Tree for Classification**  
+2. **Decision Tree for Regression**
+
+***
+
+## 1. Decision Tree for Classification
+
+### What is it?
+
+- A supervised algorithm used to classify data points into categorical classes.
+- It splits the data based on feature values using conditions to form a tree structure.
+- Each node represents a test on a feature, branches represent outcomes, and leaves represent class labels.
+
+### How it works?
+
+- Starting from the root node, the tree splits the dataset using features that best separate the classes based on metrics like **Gini Index**, **Entropy/Information Gain**.
+- This process continues recursively on subsets until leaves (end nodes) containing class predictions are formed.
+
+### Key Concepts
+
+- **Gini Index:** Measures impurity; lower means pure node.  
+- **Entropy:** Measures disorder; higher entropy means more mixed nodes.  
+- **Information Gain:** Reduction in entropy after a split; choose the feature with the highest gain.
+
+### Example (Classifying Fruits)
+
+- Features: Color (Red, Green), Size (Small, Large)  
+- Classes: Apple, Grape  
+- Split 1: Color = Red → Apple (leaf)  
+- Split 2: Color = Green → Check Size → Small = Grape, Large = Not Grape
+
+***
+
+## 2. Decision Tree for Regression
+
+### What is it?
+
+- Used to predict continuous numeric output rather than discrete classes.
+- The tree splits data to minimize **variance** within each split, aiming for homogenous target values in leaves.
+
+### How it works?
+
+- Splits the data based on feature values.
+- Instead of class labels, output at leaf nodes is the mean value of target variables in that subset.
+- Splitting continues until conditions like minimum samples per leaf or maximum depth are met.
+
+### Key Concepts
+
+- Uses **Mean Squared Error (MSE)** or variance reduction to decide splits.
+- Prediction for new data: average value of target in the leaf node it falls into.
+
+### Example (Predicting House Prices)
+
+- Features: Number of rooms, Area in sq ft  
+- Splits:  
+  - Number of rooms > 3? → Yes → Average price in this node is ₹50 lakh  
+  - No → average price is ₹30 lakh
+
+***
+
+## Summary and Use Cases
+
+| Decision Tree Classification                    | Decision Tree Regression                         |
+|------------------------------------------------|-------------------------------------------------|
+| Predicts discrete classes                        | Predicts continuous values                        |
+| Uses Gini Index or Entropy for best splits      | Uses variance reduction/mean squared error       |
+| Leaves contain class labels                      | Leaves contain mean target values                 |
+| Examples: Spam detection, image recognition      | Examples: House price prediction, sales forecasting |
+
+***
+
+Decision Trees are intuitive and interpretable models widely used for classification and regression tasks, capable of handling both numerical and categorical data.
+
+***
+
+# Ensemble Learning: Bagging and Boosting Techniques
+
+***
+
+## What is Ensemble Learning?
+
+- Ensemble learning combines predictions from multiple models to create a stronger overall model.
+- The idea: **"Many weak learners combine to make a strong learner."**
+- Helps improve accuracy, reduce overfitting, and increase robustness.
+
+***
+
+## Why Use Ensemble Methods?
+
+- Single models can be unstable or prone to errors.
+- Ensemble methods reduce model variance (bagging), bias (boosting), or both.
+- Can handle complex datasets better than individual models.
+
+***
+
+## Types of Ensemble Methods
+
+1. **Bagging (Bootstrap Aggregating)**  
+2. **Boosting**
+
+***
+
+## 1. Bagging (Bootstrap Aggregating)
+
+### What is Bagging?
+
+- Bagging creates multiple models by training each on a different random subset (with replacement) of the training data (called bootstrap samples).
+- Each model independently predicts the output.
+- Final prediction is by **majority voting** (classification) or **averaging** (regression).
+
+### Key Points
+
+- Reduces variance by averaging multiple models.
+- Models are built **in parallel**.
+- Each model gets a different subset of data — introduces diversity.
+
+### Example: Random Forest
+
+- An extension of bagging using decision trees.
+- Each tree is trained on a bootstrap sample and at each split chooses from a random subset of features.
+- Final forest prediction is the majority vote of all trees.
+
+### Visualization:
+- Imagine building several trees from different data slices; the ensemble prediction is aggregated.
+
+***
+
+## 2. Boosting
+
+### What is Boosting?
+
+- Boosting combines multiple weak learners **sequentially**, where each new model focuses on the errors made by the previous ones.
+- The models are weighted by their performance; better models get more say.
+- The final output is a weighted sum (or vote) of the individual models.
+
+### Key Points
+
+- Reduces bias and variance by focusing on hard-to-predict instances.
+- Models are built **sequentially**, learning from past mistakes.
+- Strong learners formed from combination of weak learners.
+
+### Popular Boosting Algorithms
+
+- **AdaBoost (Adaptive Boosting):** Focuses more on misclassified points by increasing their weights.
+- **Gradient Boosting:** Models are added to minimize the loss function using gradient descent.
+- **XGBoost (Extreme Gradient Boosting):** Efficient implementation of gradient boosting with regularization.
+
+### Example: AdaBoost for binary classification
+
+- Start with an equal weight for all data points.
+- Train a weak learner (e.g., shallow tree).
+- Increase weights for misclassified samples.
+- Train next learner on weighted data.
+- Combine predictions weighted by learner accuracy.
+
+***
+
+## Differences Between Bagging and Boosting
+
+| Aspect              | Bagging                                  | Boosting                                  |
+|---------------------|-----------------------------------------|------------------------------------------|
+| Construction        | Parallel (independent models)            | Sequential (dependent models)             |
+| Focus               | Reducing variance                         | Reducing bias and variance                |
+| Data Sampling       | Bootstrap samples (random subsets)       | Weighted samples based on error           |
+| Model Weighting     | Equal voting/averaging                    | Weighted voting based on learner accuracy |
+| Examples            | Random Forest                            | AdaBoost, Gradient Boosting, XGBoost     |
+| Complexity          | Simpler to implement                     | More complex and sensitive to parameters |
+
+***
+
+## Why Bagging and Boosting Work?
+
+- **Bagging** stabilizes models by averaging over different data samples, reducing overfitting.
+- **Boosting** improves weak learners by sequentially correcting errors, creating a strong composite model.
+
+***
+
+## Summary Example: Predicting Loan Approval
+
+- Bagging builds many decision trees on subsets of applicant data; final decision is majority vote.
+- Boosting trains sequential models focusing on misclassified applicants, improving prediction accuracy at each step.
+
+***
+
+Ensemble methods like bagging and boosting offer powerful ways to improve predictive performance, combining multiple models intelligently and overcoming limitations of single models.
+
+***
+
+
+***
+
+# Random Forest: Classifier and Regressor
+
+***
+
+## What is Random Forest?
+
+- Random Forest is an **ensemble learning method** that builds multiple decision trees and merges their outcomes to get more accurate and stable predictions.
+- It improves over a single decision tree by reducing overfitting and variance.
+- Works for both **classification** (predicting categories) and **regression** (predicting continuous values).
+
+***
+
+## How Does Random Forest Work?
+
+1. **Bootstrap Sampling (Bagging):**  
+   - Randomly sample data with replacement to create multiple different training datasets.
+   
+2. **Build Multiple Decision Trees:**  
+   - For each sample, build a decision tree.
+   - At each split in the tree, instead of considering all features, a random subset of features is selected to determine the best split.
+   - This randomness introduces diversity among trees.
+   
+3. **Aggregate Results:**  
+   - For **classification**: use **majority voting** among all trees to decide the class.
+   - For **regression**: use **average** of predictions from all trees.
+
+***
+
+## Random Forest Classifier
+
+- Predicts the **category/class** of input data.
+- Uses multiple decision trees voting on the most common class.
+- Example: Classifying emails into "Spam" or "Not Spam":
+  - Each tree votes.
+  - Final prediction is the class with the most votes.
+
+***
+
+## Random Forest Regressor
+
+- Predicts a **continuous value**.
+- Uses average prediction of all individual trees.
+- Example: Predicting house price based on features like area, rooms:
+  - Each tree predicts a price.
+  - Final output is average of all predicted prices.
+
+***
+
+## Advantages of Random Forest
+
+- Handles **high dimensionality** and large datasets well.
+- Reduces **overfitting** compared to single decision trees.
+- Can handle **missing values** and maintain accuracy.
+- Robust to noisy data.
+
+***
+
+## Key Parameters
+
+- **Number of Trees (n_estimators):** More trees generally improve performance but increase computation.
+- **Max Features:** Number of features to consider at each split.
+- **Max Depth:** Maximum depth of each tree to control overfitting.
+- **Minimum Samples per Leaf:** Controls granularity of the tree splits.
+
+***
+
+## Visual Summary:
+
+```
+Data ⇒ Random Sample ⇒ Build Tree ⇒ Repeat (many times) ⇒ Aggregate Outputs (Voting/Averaging) ⇒ Final Prediction
+```
+
+***
+
+## Practical Example
+
+Suppose a bank wants to detect fraud.
+
+- Create 100 trees, each trained on different random samples of transaction data.
+- For a new transaction, each tree outputs "Fraud" or "Not Fraud."
+- Majority voting determines the final Fraud prediction.
+- Random Forest improves prediction accuracy and reduces false positives.
+
+***
+
+Random Forest is a powerful and versatile algorithm widely used because of its accuracy and ability to handle different types of data problems.
+
+
+***
+
+# Boosting and AdaBoost Algorithms
+
+***
+
+## What is Boosting?
+
+- Boosting is an ensemble technique that combines several weak learners sequentially to form a strong learner.
+- Each subsequent model focuses more on the errors made by previous models.
+- It reduces bias and variance, improving prediction accuracy.
+- Unlike bagging (parallel models), boosting builds models **one after another**.
+
+***
+
+## How Boosting Works?
+
+1. Start training a simple model (weak learner) on the dataset.
+2. Evaluate the model and identify misclassified or poorly predicted samples.
+3. Increase the weight or importance of these hard-to-predict samples.
+4. Train the next model focusing more on these challenging samples.
+5. Continue this process for a predefined number of models or until performance stabilizes.
+6. Combine the predictions of all models, usually with weighted voting, where better models have higher influence.
+
+***
+
+## Common Boosting Algorithms
+
+- AdaBoost (Adaptive Boosting)
+- Gradient Boosting
+- XGBoost (Extreme Gradient Boosting)
+- LightGBM
+- CatBoost
+
+***
+
+## AdaBoost (Adaptive Boosting) Algorithm
+
+### Overview
+
+- AdaBoost is one of the earliest and simplest boosting algorithms.
+- Built for binary classification (can extend to multi-class).
+- Uses decision stumps (trees with one split) as weak learners typically.
+
+### Working Steps
+
+1. Assign equal weights to all training samples.
+2. Train the first weak learner.
+3. Compute error rate: sum of weights of misclassified samples.
+4. Calculate learner's weight (influence) based on error: better learners get higher weight.
+5. Increase weights of misclassified samples to focus on them in the next round.
+6. Train next learner on updated weights.
+7. Final prediction combines learner predictions weighted by their influence.
+
+### Formula for Learner Weight, $$\alpha_t$$:
+
+$$
+\alpha_t = \frac{1}{2} \ln\left(\frac{1 - \epsilon_t}{\epsilon_t}\right)
+$$
+
+Where:
+
+- $$\epsilon_t$$ = error of the weak learner at iteration $$t$$.
+
+### Weight Update for samples:
+
+- Increase weights of misclassified samples: more attention in next learner.
+- Normalize weights to sum to 1.
+
+***
+
+## Example: AdaBoost for Spam Detection
+
+- Dataset: Emails labeled as Spam or Not Spam.
+- First weak learner might misclassify some emails.
+- Increase weights of misclassified emails.
+- Next learner focuses more on these emails.
+- After multiple rounds, combine all learners for final prediction.
+
+***
+
+## Advantages of AdaBoost
+
+- Easy to implement.
+- Often better than many other models.
+- Handles complex data by combining simple models.
+- Less prone to overfitting compared to other ensemble methods.
+
+***
+
+## Limitations of AdaBoost
+
+- Sensitive to noisy data and outliers (as it focuses more on hard examples).
+- Performance depends on weak learner choice.
+- Computationally expensive with many rounds.
+
+***
+
+## Summary Block Diagram:
+
+- Data → Initialize weights → Train weak learner → Evaluate & Update weights → Train next learner → Combine models→ Final Prediction
+
+***
+
+AdaBoost remains a foundational algorithm in boosting, inspiring many advanced variants like Gradient Boosting and XGBoost.
+
+
+***
+
+# K-Means Clustering Algorithm
+
+***
+
+### What is K-Means?
+
+- K-Means is a **partitioning-based clustering algorithm** that groups data points into $$ K $$ clusters based on feature similarity.
+- The objective is to minimize the sum of squared distances between points and their respective cluster centroids.
+
+***
+
+### How K-Means Works?
+
+1. **Initialize** $$ K $$ centroids randomly.
+2. **Assign** each data point to the nearest centroid based on distance (usually Euclidean).
+3. **Update** centroids by calculating the mean of points assigned to each cluster.
+4. Repeat steps 2 and 3 until convergence (centroids stop changing or max iterations reached).
+
+***
+
+### Example of K-Means:
+
+Given points: $$ (2, 10), (2, 5), (8, 4), (5, 8), (7, 5), (6, 4), (1, 2), (4, 9) $$
+
+- Set $$ K=2 $$ clusters.
+- Initialize centroids randomly, say: $$ (2,10) $$ and $$ (5,8) $$.
+- Assign points to clusters by nearest centroid.
+- Recompute centroids as means of assigned points.
+- Repeat until clusters stabilize.
+
+### Applications:
+
+- Customer segmentation.
+- Market research.
+- Image compression.
+
+***
+
+# Hierarchical Clustering Algorithm
+
+***
+
+### What is Hierarchical Clustering?
+
+- Builds a hierarchy (tree) of clusters called dendrogram.
+- No need to specify number of clusters upfront.
+- Two approaches:
+  - **Agglomerative (bottom-up):** Start with every point as a cluster, merge closest pairs iteratively.
+  - **Divisive (top-down):** Start with all points in one cluster, split iteratively.
+
+***
+
+### How Agglomerative Hierarchical Clustering Works?
+
+1. Consider each data point as a single cluster.
+2. Compute distances between clusters.
+3. Merge the two closest clusters.
+4. Repeat step 2-3 until all points merge into one cluster or desired number achieved.
+
+### Example of Agglomerative Clustering:
+
+Points:  $$ A, B, C, D $$
+
+- Start with clusters: {A}, {B}, {C}, {D}.
+- Calculate pairwise distances.
+- Merge closest clusters, say {A} and {B}.
+- Update distance matrix.
+- Continue merging until one cluster or desired clusters remain.
+
+***
+
+### Types of Linkages (Distance Between Clusters):
+
+- **Single linkage:** Distance between closest points.
+- **Complete linkage:** Distance between farthest points.
+- **Average linkage:** Average pairwise distance.
+- **Ward’s method:** Minimizes variance within clusters.
+
+***
+
+### Applications:
+
+- Gene expression analysis.
+- Document clustering.
+- Social network analysis.
+
+***
+
+Both algorithms help find natural groupings in data but differ in approach—K-Means requires $$ K $$ upfront and uses centroid-based partitioning, while hierarchical builds a multi-level tree without presetting cluster count.
+
+***
+
+***
+
+# DBSCAN (Density-Based Spatial Clustering of Applications with Noise) Algorithm
+
+***
+
+### What is DBSCAN?
+
+- DBSCAN is a **density-based clustering algorithm**.
+- It groups together points that are closely packed (high density) and marks points in low-density regions as outliers (noise).
+- Particularly effective at discovering clusters with arbitrary shapes and sizes.
+
+***
+
+### Key Terms in DBSCAN:
+
+- **Epsilon (ε):** Radius to define neighborhood around a point.
+- **MinPts:** Minimum number of points required to form a dense region.
+- **Core Point:** A point with at least MinPts in its ε-neighborhood.
+- **Border Point:** Has fewer than MinPts neighbors but lies within ε of a core point.
+- **Noise Point:** Neither core nor border point, considered outlier.
+
+***
+
+### How DBSCAN Works?
+
+1. For each unvisited point, check its ε-neighborhood.
+2. If it’s a core point (neighbors ≥ MinPts), start a cluster.
+3. Expand cluster by recursively adding all points density-reachable from core points.
+4. Points not fitting any cluster criteria are noise.
+
+***
+
+### Example:
+
+Consider points on a 2D plane:
+
+- Set ε=2 units, MinPts=3.
+- A point with 3 or more points within ε is a core point and forms/expands a cluster.
+- Points lying within ε of core points but with fewer neighbors are border points.
+- Remaining points are noise.
+
+Clusters are formed dynamically based on density without needing to specify number of clusters.
+
+***
+
+### Advantages:
+
+- Can find clusters of arbitrary shape.
+- Identifies noise effectively.
+- Does not require specifying number of clusters.
+
+***
+
+### Limitations:
+
+- Sensitive to ε and MinPts parameters.
+- Struggles with clusters of varying densities.
+
+***
+
+# Bias and Variance in Machine Learning
+
+***
+
+### What is Bias?
+
+- Bias is the error due to overly simplistic assumptions in the model.
+- High bias leads to underfitting: model is too simple to capture underlying patterns.
+- Example: Linear model fitting highly non-linear data.
+
+***
+
+### What is Variance?
+
+- Variance is the error due to model’s sensitivity to small fluctuations in the training set.
+- High variance leads to overfitting: model fits noise instead of the underlying pattern.
+- Model performs well on training data but poorly on new data.
+
+***
+
+### Trade-Off Between Bias and Variance:
+
+- **Bias-Variance Tradeoff:** Balancing flexible models (low bias, high variance) and simple models (high bias, low variance) is key to good generalization.
+- Goal is to minimize overall error = Bias^2 + Variance + Irreducible Error.
+
+***
+
+### Visualization:
+
+- High Bias: Model misses trends (underfit).
+- High Variance: Model fits noise (overfit).
+- Balanced: Model captures trends without noise.
+
+***
+
+### How to Address Bias and Variance:
+
+- Increase model complexity to reduce bias.
+- Use regularization, pruning, or ensemble methods to reduce variance.
+- Use cross-validation to detect and balance bias-variance.
+
+***
+
+Understanding and managing bias and variance is crucial for building robust machine learning models.
+
+
+***
+
+# XGBoost Algorithm: Classifier and Regressor
+
+***
+
+## What is XGBoost?
+
+- **XGBoost (Extreme Gradient Boosting)** is an advanced implementation of gradient boosting decision trees.
+- Developed to be highly efficient, scalable, and portable.
+- It has gained popularity for winning many machine learning competitions due to its speed and predictive performance.
+- Supports both classification and regression problems.
+
+***
+
+## Key Features of XGBoost
+
+- Parallel processing, making it faster than traditional Gradient Boosting.
+- Regularization to avoid overfitting (L1 & L2 regularization).
+- Handling missing values internally.
+- Ability to handle large datasets efficiently.
+- Flexibility with customized objective functions and evaluation criteria.
+
+***
+
+## How XGBoost Works?
+
+1. Builds an ensemble of trees like gradient boosting.
+2. Each new tree fits the residual errors (differences between observed and predicted values) of the previous trees.
+3. Uses gradient descent optimization and second-order derivatives (Newton Boosting) to minimize the loss function.
+4. Applies regularization to control model complexity and prevent overfitting.
+5. After all trees are built, predictions are made by summing outputs of all trees.
+
+***
+
+## XGBoost Classifier
+
+- Used for solving classification tasks.
+- For binary classification, uses logistic loss as the objective function.
+- Predicts class probabilities and assigns class labels.
+- Example: Spam email detection, customer churn prediction.
+
+***
+
+## XGBoost Regressor
+
+- Used for regression tasks where the output is continuous.
+- Uses squared error or other regression loss functions.
+- Predicts continuous values e.g., house prices, sales forecasting.
+
+***
+
+## Example Workflow of XGBoost
+
+- Start with initial prediction (mean of target values).
+- Calculate residuals between predictions and actual values.
+- Build tree on residuals to capture errors.
+- Update predictions with new tree output.
+- Repeat until stopping criteria (number of trees or minimum loss improvement) met.
+
+***
+
+## Advantages of XGBoost
+
+- State-of-the-art performance due to gradient boosting improvements.
+- Fast and efficient training on large datasets.
+- Works well with heterogeneous data types.
+- Includes built-in cross-validation and feature importance.
+
+***
+
+## Summary:
+
+| Aspect                  | XGBoost Classifier                                  | XGBoost Regressor                               |
+|-------------------------|----------------------------------------------------|-------------------------------------------------|
+| Problem Type            | Classification                                     | Regression                                      |
+| Objective Function      | Logistic Loss (binary), Softmax (multiclass)       | Squared Error, Absolute Error, etc.             |
+| Output                  | Class probabilities and labels                      | Continuous prediction                            |
+| Use Cases               | Spam detection, Loan default prediction, Image recognition | House price prediction, Sales forecasting       |
+
+***
+
+XGBoost is widely used in industry and competitions due to its combination of flexibility, speed, and accuracy.
+
+
+# Support Vector Machine (SVM) Algorithm
+
+***
+
+### What is SVM?
+
+- SVM is a powerful supervised machine learning algorithm used for classification and regression tasks.
+- It aims to find the **optimal hyperplane** that best separates data points of different classes with maximum margin.
+- Best suited for **binary classification** problems but adaptable for multiclass problems as well.
+
+***
+
+### Key Concepts
+
+1. **Hyperplane**  
+   - A decision boundary that separates different classes.
+   - In 2D, it's a line; in 3D, it's a plane; in higher dimensions, a hyperplane.
+
+2. **Support Vectors**  
+   - Data points closest to the hyperplane.
+   - They influence the position and orientation of the hyperplane.
+   - The margin is defined by these support vectors.
+
+3. **Margin**  
+   - The distance between the hyperplane and the nearest data points (support vectors).
+   - Goal: maximize this margin for better generalization.
+
+***
+
+### How SVM Works?
+
+- Among all possible hyperplanes separating the classes, SVM chooses the one with the largest margin.
+- If data is **linearly separable**, SVM solves a quadratic optimization problem to find this optimal hyperplane.
+- If data is **not linearly separable**, SVM uses:
+
+  - **Kernel Trick**: transforms input features into higher-dimensional space where linear separation is possible.
+  
+***
+
+### Common Kernel Functions
+
+- **Linear Kernel**: suitable when data is linearly separable.
+- **Polynomial Kernel**: captures polynomial relationships.
+- **Radial Basis Function (RBF) Kernel** or Gaussian Kernel: effective in complex scenarios, maps data into infinite dimensional space.
+
+***
+
+### Example
+
+- Classify emails as Spam or Not Spam.
+- SVM finds a hyperplane that separates spam emails from non-spam with maximum margin.
+- Support vectors are critical emails nearest to the hyperplane that define the classifier.
+
+***
+
+### Advantages of SVM
+
+- Effective in high-dimensional spaces.
+- Robust to overfitting especially in high dimensions.
+- Works well when number of features exceeds number of samples.
+- Flexible with kernels for different types of data.
+
+***
+
+### Limitations
+
+- Choosing the right kernel and parameters can be complex.
+- Training time can be high for large datasets.
+- Less effective for noisy data with overlapping classes.
+
+***
+
+### Summary
+
+| Aspect                    | Description                                   |
+|---------------------------|-----------------------------------------------|
+| Goal                      | Find hyperplane with maximum margin            |
+| Support Vectors           | Critical data points defining the margin       |
+| Kernels                   | Allows SVM to handle non-linear data            |
+| Use Cases                 | Text classification, image classification, bioinformatics |
+
+***
+
+SVM is a versatile and powerful algorithm widely used in practical machine learning applications.
