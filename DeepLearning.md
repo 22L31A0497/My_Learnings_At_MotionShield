@@ -651,4 +651,219 @@ Imagine you’re comparing **weight (in kg)** and **height (in cm)** of students
 * **Normalization = Squeezing**
   → Think: "Squeeze all values between **0 and 1**".
 
+
+# 🧠 Forward Pass & Backpropagation
+
+## 📌 Overview
+
+Neural networks learn through two key steps:
+
+1. **Forward Propagation (Forward Pass):** Input data flows through the network to produce an output.
+2. **Backward Propagation (Backpropagation):** The network calculates errors, computes gradients, and updates weights and biases to improve predictions.
+
 ---
+
+## 🔁 Forward Propagation (Forward Pass)
+
+Forward propagation is the **prediction phase** of the network — how input features transform into the final output.
+
+---
+
+### 1. **Input Layer**
+
+* Receives raw features $x_1, x_2, ..., x_n$.
+* Each input is multiplied by a weight $w$ and added to a bias $b$.
+
+Equation:
+
+$$
+z = w_1x_1 + w_2x_2 + ... + w_nx_n + b
+$$
+
+---
+
+### 2. **Weighted Sum**
+
+For each neuron in a hidden layer:
+
+$$
+z^{[l]} = W^{[l]} \cdot a^{[l-1]} + b^{[l]}
+$$
+
+* $W$: Weight matrix
+* $b$: Bias vector
+* $a^{[l-1]}$: Output from previous layer
+
+---
+
+### 3. **Activation Function**
+
+The weighted sum $z$ is passed through an **activation function** $\sigma(z)$.
+
+* Purpose: Introduce **non-linearity** (so the model learns complex patterns).
+* Common activation functions:
+
+  * **Sigmoid:** $\sigma(z) = \frac{1}{1 + e^{-z}}$
+  * **ReLU:** $\sigma(z) = \max(0, z)$
+  * **Tanh:** $\sigma(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}$
+
+Equation:
+
+$$
+a^{[l]} = \sigma(z^{[l]})
+$$
+
+---
+
+### 4. **Hidden Layers**
+
+* Outputs from one layer become inputs for the next.
+* Transformation continues until the final layer.
+
+---
+
+### 5. **Output Layer**
+
+* Produces the prediction $\hat{y}$.
+* Example: **Softmax activation** for classification problems.
+
+---
+
+### 🧮 Example Calculation
+
+Suppose:
+
+* Input: $X = [1, 2]$
+* Weights: $W = [[0.5, -0.6], [0.1, 0.8]]$
+* Biases: $b = [0.2, -0.3]$
+
+Step 1: Weighted sum
+
+$$
+z = W \cdot X + b
+$$
+
+Step 2: Apply activation (ReLU)
+
+$$
+a = \max(0, z)
+$$
+
+---
+
+## 🔄 Backward Propagation (Backpropagation)
+
+Backward propagation is the **learning phase** of the network — how it adjusts weights & biases to reduce error.
+
+---
+
+### 1. **Loss Calculation**
+
+Measure error between actual output $y$ and predicted output $\hat{y}$.
+
+Example (Mean Squared Error):
+
+$$
+\text{Loss} = \frac{1}{2}(y - \hat{y})^2
+$$
+
+---
+
+### 2. **Gradient Calculation**
+
+* Use the **chain rule of calculus** to compute gradients of the loss with respect to each weight and bias.
+* Gradient = how much a small change in a parameter affects the loss.
+
+---
+
+### 3. **Weight Update**
+
+Update rule using **gradient descent**:
+
+$$
+w = w - \alpha \frac{\partial \text{Loss}}{\partial w}
+$$
+
+where $\alpha$ = learning rate.
+
+---
+
+### 4. **Repeat**
+
+* Forward pass → Backward pass → Update weights.
+* Repeat for many **epochs** until the loss is minimized.
+
+---
+
+## 🧩 Weights & Biases Explained
+
+* **Weights (w):** Control the strength of connections between neurons.
+* **Biases (b):** Allow the model to shift the activation up or down to better fit data.
+
+Equation of a neuron:
+
+$$
+y = w \cdot x + b
+$$
+
+---
+
+### 🔢 Example of Effect
+
+* If $w = 1, b = 0$: output follows input.
+* Changing $w$: changes slope.
+* Changing $b$: shifts the line vertically.
+
+---
+
+### 🔁 Role in Training
+
+1. Start with random weights and biases.
+2. Forward pass → compute predictions.
+3. Compare predictions with actual output.
+4. Backward pass → adjust weights & biases using gradients.
+5. Repeat until performance improves.
+
+---
+
+## ⚙️ Training Workflow (Step by Step)
+
+1. Initialize weights & biases randomly.
+2. **Forward propagation:** Compute predictions.
+3. **Loss calculation:** Measure error.
+4. **Backward propagation:** Compute gradients.
+5. **Update parameters:** Adjust weights & biases.
+6. Repeat for multiple iterations (epochs).
+
+---
+
+## 📊 Scale of Parameters in Modern Models
+
+* Small networks → a few thousand parameters.
+* Large AI models (like GPT, LLaMA, etc.) → **millions to billions of parameters** (weights & biases).
+* These parameters are tuned during training to achieve high accuracy.
+
+---
+
+## ✅ Summary
+
+| Concept              | Role                                                      |
+| -------------------- | --------------------------------------------------------- |
+| **Forward Pass**     | Data flows through network to produce predictions.        |
+| **Backward Pass**    | Gradients are computed, weights & biases updated.         |
+| **Weights**          | Control strength of input connections.                    |
+| **Biases**           | Shift outputs to fit data better.                         |
+| **Activation**       | Introduces non-linearity for learning complex patterns.   |
+| **Loss Function**    | Measures difference between predictions & actual results. |
+| **Gradient Descent** | Optimization method to minimize loss.                     |
+
+---
+
+## 📘 Notes
+
+* **Forward propagation** is deterministic: same inputs & parameters → same outputs.
+* **Backward propagation** is iterative: weights improve step by step.
+* Together, they form the **core learning loop** in neural networks.
+
+---
+
