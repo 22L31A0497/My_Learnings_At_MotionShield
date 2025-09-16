@@ -1,3 +1,6 @@
+
+## 👉 Refer this for visual explanation [Of Below Topics Click here](Input_to_Neurons.pdf)
+
 ### 1. Input to Neurons
 
 * In image processing: inputs to a neuron are the **pixel values** (or feature maps after convolution layers)—numerical values representing intensities or features extracted from images.  
@@ -366,6 +369,7 @@ References: V7 Labs , GeeksforGeeks , Towards Data Science , SuperAnnotate.[1][2
 # SiLU Activation Function (Sigmoid Linear Unit)
 
 ***
+![Alt Text](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/15f366890173d307b5a53912ffa0eebd8261b9d3/Deep%20Learning/WhatsApp%20Image%202025-09-15%20at%2007.59.36_918519f7.jpg)
 
 ### What is SiLU?
 
@@ -406,15 +410,7 @@ References: V7 Labs , GeeksforGeeks , Towards Data Science , SuperAnnotate.[1][2
 ***
 
 
-### Visualization:
 
-Imagine a smooth curve where:
-
-* For large positive `x`, output ≈ `x` (like identity).
-* For near-zero `x`, transitions smoothly.
-* For large negative `x`, output approaches zero but can be slightly negative (unlike ReLU which clips to zero).
-
----
 
 ### Simple Example Calculation:
 
@@ -729,6 +725,9 @@ Neural networks learn through two key steps:
 Forward propagation is the **prediction phase** of the network — how input features transform into the final output.
 
 ---
+
+![Alt Text](https://github.com/22L31A0497/My_Learnings_At_MotionShield/blob/15f366890173d307b5a53912ffa0eebd8261b9d3/Deep%20Learning/WhatsApp%20Image%202025-09-15%20at%2011.18.53_5d1c9f4b.jpg)
+
 
 ### 1. **Input Layer**
 
