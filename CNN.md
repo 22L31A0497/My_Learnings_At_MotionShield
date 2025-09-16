@@ -9,11 +9,19 @@
 - Common applications: handwritten digit recognition, face detection, and object detection.
 
 ### 🔹 Why Not Traditional ANN?
-- **Flattening Issue**: ANN converts 2D images into 1D arrays, losing spatial structure and relationships between nearby pixels.  
+
+
+
+
+- **Flattening Issue**: ANN converts 2D images into 1D arrays, losing spatial structure and relationships between nearby pixels.
+- ANNs treat all pixels independently and lose spatial context during processing.
+- Shifting, rotating, or changing the location of objects causes ANNs to misclassify or fail to recognize them.
+- This is a key reason why CNNs outperform ANNs in image-related tasks—they retain and exploit spatial structure.
+-  **Lack of Spatial Awareness**: ANNs treat all pixels the same, so if a feature like a koala’s face moves from left to right, the ANN fails to recognize it.
+
 - **Computational Complexity**:  
   - Large input images (e.g., 1920×1080 with RGB channels) → millions of neurons and weights.  
   - Example: Hidden layer with 4 million neurons → ~24 million weights only for the first layer. 
-- **Lack of Spatial Awareness**: ANNs treat all pixels the same, so if a feature like a koala’s face moves from left to right, the ANN fails to recognize it.
 
 ---
 
@@ -172,7 +180,6 @@ Large stride = smaller feature maps, faster computation, less detail.
 
 # 📘 Topic Extension: Padding in CNNs
 
-*(From Krish Naik “Padding in CNN” video)*
 
 ---
 
@@ -194,24 +201,31 @@ Large stride = smaller feature maps, faster computation, less detail.
 ---
 
 ## 3. Types of Padding
+
 ### 🔹 Valid Padding
-- No padding.  
-- Formula:  
-  \[
-  \text{Output size} = \frac{(\text{Input size} - \text{Filter size})}{\text{Stride}} + 1
-  \]  
-- Output smaller than input.  
+
+* No padding.
+* Formula:
+
+  ```
+  Output size = (Input size - Filter size) / Stride + 1
+  ```
+* Output smaller than input.
+
+---
 
 ### 🔹 Same Padding
-- Adds \(\frac{\text{Filter size} - 1}{2}\) pixels (for stride 1).  
-- Maintains same output size as input.  
+
+* Adds (Filter size - 1) / 2 pixels (for stride = 1).
+* Maintains same output size as input.
 
 ---
 
 ## 4. Formula with Padding
-\[
-\text{Output size} = \frac{(\text{Input size} - \text{Filter size} + 2 \times \text{Padding})}{\text{Stride}} + 1
-\]
+
+```
+Output size = (Input size - Filter size + 2 × Padding) / Stride + 1
+```
 
 ---
 
