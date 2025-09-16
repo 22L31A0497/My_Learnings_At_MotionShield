@@ -1,4 +1,4 @@
-# 👉 Refer this ==> CNN/kernels_pooling_feature_maps_Padding.pdf while explaining time
+#👉 Refer this ==> [CNN kernels_pooling_feature_maps_Padding](kernels_pooling_feature_maps_Padding.pdf)
 
 # 📘 Comprehensive Notes on Convolutional Neural Networks (CNNs)
 
