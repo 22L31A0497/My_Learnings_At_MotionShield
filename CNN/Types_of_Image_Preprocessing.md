@@ -221,3 +221,101 @@ cv2.destroyAllWindows()
 - Used widely in computer vision tasks like edge detection, image segmentation, and preprocessing for CNNs.
 
 ---
+
+
+## 4. Noise Reduction
+
+### What is Noise Reduction?
+
+Noise in images refers to unwanted random variations in brightness or color that obscure details and reduce quality. Noise reduction aims to **remove or reduce this noise** while preserving important features like edges and textures.
+
+---
+
+### Common Noise Types in Images
+
+- Salt-and-pepper noise: random black and white dots.
+- Speckle noise: granular interference often from sensors.
+
+---
+
+### Popular Noise Reduction Techniques
+
+- **Median Filtering:** Replaces each pixel value with the median of its neighboring pixels. Works well for salt-and-pepper noise while preserving edges.
+- **Bilateral Filtering:** Smooths images while preserving edges by considering both spatial closeness and pixel intensity differences.
+- **Non-Local Means (NLM):** Uses the average of similar patches in the image for noise removal, preserving texture well.
+
+---
+
+### Simple Median Filter Code Example (OpenCV Python)
+
+```
+import cv2
+from matplotlib import pyplot as plt
+
+# Load noisy image
+image = cv2.imread('noisy_image.jpg')
+
+# Apply median filter with kernel size 5
+denoised_image = cv2.medianBlur(image, 5)
+
+# Show results
+plt.subplot(121), plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)), plt.title('Original Noisy Image')
+plt.subplot(122), plt.imshow(cv2.cvtColor(denoised_image, cv2.COLOR_BGR2RGB)), plt.title('Denoised Image (Median Filter)')
+plt.show()
+```
+
+---
+
+### Benefits of Noise Reduction
+
+- Enhances image quality by removing unwanted artifacts.
+- Preserves important edges and fine details.
+- Improves performance of computer vision and machine learning models.
+
+---
+
+## 5. Image Resizing
+
+### What is Image Resizing?
+
+Image resizing is the process of changing the dimensions (width and height) of an image. This is essential for:
+
+- Matching input size requirements of machine learning models.
+- Reducing computational load.
+- Standardizing dataset image sizes for consistency.
+
+---
+
+### Methods of Resizing
+
+- **Downsampling:** Reducing image size to smaller dimensions.
+- **Upsampling:** Enlarging image dimensions, often using interpolation techniques.
+
+---
+
+### Simple Image Resizing Code Example (OpenCV Python)
+
+```
+import cv2
+
+# Load original image
+image = cv2.imread('original_image.jpg')
+
+# Resize image to 200x200 pixels
+resized_image = cv2.resize(image, (200, 200))
+
+# Display resized image
+cv2.imshow('Resized Image', resized_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+---
+
+### Benefits of Image Resizing
+
+- Standardizes image sizes for batch processing.
+- Helps models train efficiently with uniform input.
+- Reduces memory usage and speeds up computation.
+
+---
