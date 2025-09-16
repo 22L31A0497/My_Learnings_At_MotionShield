@@ -1,0 +1,103 @@
+
+# CNN Architectures
+## What is a CNN Architecture?
+
+A CNN (Convolutional Neural Network) architecture is the specific design or blueprint of how layers are organized and connected in a deep learning model used for tasks like image processing or recognition. It defines the number of layers, types of layers (convolutional, pooling, fully connected), kernel sizes, strides, and other parameters that determine how the network processes input data and extracts features.
+
+---
+
+## Types of Popular CNN Architectures
+
+Many CNN architectures have been developed over time to improve accuracy, speed, and efficiency. Some of the most important and foundational types include:
+
+- **LeNet-5:** One of the earliest CNNs for digit recognition.  
+- **AlexNet:** Popularized deep CNNs on ImageNet challenge with ReLU and dropout.  
+- **VGGNet:** Deep networks with small 3x3 filters stacked.  
+- **ResNet:** Introduced skip connections for very deep networks.  
+- **MobileNet:** Lightweight CNN optimized for mobile devices.  
+- **GoogLeNet (Inception):** Utilizes inception modules with mixed filter sizes.
+
+Each architecture improves on different aspects like depth, computational efficiency, or ability to train using large datasets.
+
+---
+
+## 1. LeNet-5 Architecture: Simple Notes
+
+---
+
+### What is LeNet?
+
+LeNet is one of the earliest Convolutional Neural Networks (CNNs) developed by Yann LeCun and his team. It was specifically designed for the task of recognizing handwritten digits, such as those seen on bank checks.
+
+- Works on grayscale images of size 32×32×1 (height × width × channels).  
+- Developed long before modern GPUs existed, so designed to be simple and efficient on slow computers.  
+- Introduced many foundational concepts still used in CNNs today.
+
+---
+
+### Layer-by-Layer Structure of LeNet
+
+LeNet has a total of **7 layers** (excluding the input) consisting of convolutional, pooling, and fully connected layers.
+
+| Step | Layer Type          | Details                                  | Output Size      |
+|-------|---------------------|------------------------------------------|------------------|
+| 1     | Input Layer         | Grayscale image, size 32×32×1             | 32×32×1          |
+| 2     | Convolutional Layer 1 | 6 filters, size 5×5, stride = 1               | 28×28×6          |
+| 3     | Pooling Layer 1      | Max pooling, size 2×2, stride = 2            | 14×14×6          |
+| 4     | Convolutional Layer 2 | 16 filters, size 5×5, stride = 1               | 10×10×16         |
+| 5     | Pooling Layer 2      | Max pooling, size 2×2, stride = 2            | 5×5×16           |
+| 6     | Flattening           | Converts 3D output to 1D vector              | 400 (5×5×16)     |
+| 7     | Fully Connected Layer 1 | 120 neurons                                | 120              |
+| 8     | Fully Connected Layer 2 | 84 neurons                                 | 84               |
+| 9     | Fully Connected Layer 3 (Output) | 10 neurons (for digits 0 to 9)           | 10               |
+
+---
+
+### Explanation of Each Layer
+
+**1. Input Layer**  
+- Takes a 32×32 grayscale image (one channel).  
+
+**2. First Convolutional Layer (Conv1)**  
+- Applies 6 filters, each of size 5×5.  
+- Stride of 1 means filters move one pixel at a time.  
+- Output size shrinks because filter doesn’t cover image edges.  
+- Output is 28×28 with 6 channels (one per filter).
+
+**3. First Pooling Layer (Pool1)**  
+- Max pooling reduces each 2×2 window to its maximum value.  
+- Stride of 2 halves the image size.  
+- Output is 14×14×6.
+
+**4. Second Convolutional Layer (Conv2)**  
+- Applies 16 filters, size 5×5, stride 1.  
+- Learns more complex, deeper features.  
+- Output size is 10×10×16.
+
+**5. Second Pooling Layer (Pool2)**  
+- Another max pooling operation, 2×2 with stride 2.  
+- Output is 5×5×16.
+
+**6. Flattening**  
+- Converts the 3D output of shape 5×5×16 into a 1D vector of length 400 (5×5×16=400).  
+- This prepares data for the fully connected layers.
+
+**7-9. Fully Connected (FC) Layers**  
+- FC1: 120 neurons.  
+- FC2: 84 neurons.  
+- FC3: 10 neurons (one for each digit class 0–9).  
+- Final output uses softmax activation to give the probability of each digit.
+
+---
+
+## Summary of LeNet Flow
+
+1. Input 32×32 grayscale image  
+2. Extract basic features through Conv1  
+3. Downsample using Pool1  
+4. Extract deeper features through Conv2  
+5. Downsample using Pool2  
+6. Flatten features for classification  
+7. Classify digits with final FC layers
+
+---
