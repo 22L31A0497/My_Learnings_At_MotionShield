@@ -935,6 +935,10 @@ $$
 ---
 # 📘 Machine Learning: Loss Functions
 
+
+## 👉 Refer this for visual explanation [Loss Functions](DifferentTypesOfLossFunctions.pdf)
+
+
 ## 🔹 What is a Loss Function?
 A **loss function** is a mathematical formula that measures **how wrong** a model’s prediction is compared to the actual target value.
 
