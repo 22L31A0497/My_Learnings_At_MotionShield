@@ -1,3 +1,5 @@
+**Deep Learning (DL):**  
+A subset of Machine Learning that uses multi-layered Artificial Neural Networks (ANNs) to automatically learn features and patterns from large amounts of data, enabling tasks such as image recognition, natural language processing, and speech recognition.
 
 ## 👉 Refer this for visual explanation [Of Below Topics Click here](Input_to_Neurons.pdf)
 
