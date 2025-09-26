@@ -168,7 +168,7 @@ is the sigmoid function.
 ## Before that explain ip and op with and without Activation Function and then tell imporatance and types of Activation Functions
 
 
-## 👉 Refer this for visual explanation [Why Activation Functions Are Needed ](Why_Activation_functions_needed.pdf)
+## 👉 Refer this for visual explanation [Why Activation Functions Are Needed ](merged_organized.pdf)
 
 
 # Different types of Activation Functions
