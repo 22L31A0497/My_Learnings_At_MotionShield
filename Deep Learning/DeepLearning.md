@@ -20,22 +20,21 @@ A subset of Machine Learning that uses multi-layered Artificial Neural Networks 
 
 ### 3. Weights
 
-* Weights are **parameters that scale input features**.
-* A **feature** is just an input value (like pixel brightness, age, salary, etc.).
-* A **weight** decides how **important** that feature is for the model.
-* **Scaling** means multiplying the feature by the weight.
+* **Definition:** Weights are the **parameters** in a neural network that scale input features.
+* **Starting Point:** At the beginning, weights are usually set to **random values** (so that the network doesn’t make the same predictions everywhere).
+* **Training:** During training, these weights are **continuously adjusted** until the model produces the desired outputs (e.g., recognizing the correct object, or identifying the right color).
 
-* They determine **how strongly an input influences the neuron output**.  
+✅ **Simple way to understand weights:**
 
-✅ **Simple way to understand weights:**  
-- **Weights = tiny settings** that decide what the neuron looks for.  
-- **Training = fine-tuning those settings** so the model notices useful details (like cracks in a car) and ignores useless ones (like sky or road).  
-- In images, weights act like **small tools (filters)** that look for patterns in the picture.  
-- For example:  
-  - Some weights may focus on **edges**,  
-  - Some on **colors**,  
-  - Some on **shapes**.  
-- Example: if we train on car damage images, the model may learn weights that focus on **cracks, dents, or scratches** instead of the background.  
+* Think of weights as **tiny adjustable knobs**.
+* At first, the knobs are turned randomly.
+* Training is like **tuning those knobs** so the model learns what matters.
+* In images:
+
+  * Some weights learn to detect **edges**,
+  * Some learn **colors**,
+  * Others learn **shapes or textures**.
+* Example: In car damage detection, weights will gradually learn to **highlight cracks, dents, or scratches** instead of focusing on irrelevant parts like the sky or road.
 
 ---
 
