@@ -1,5 +1,5 @@
 
-# 🧠 Fine-Tuning a Neural Network – Class Notes
+# 🧠 Fine-Tuning a Neural Network
 
 ## 📌 What is Fine-Tuning?
 
