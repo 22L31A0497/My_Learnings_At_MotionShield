@@ -215,19 +215,6 @@ Fine-tuning is a powerful technique in deep learning that allows us to adapt exi
   - PyImageSearch: "Training Large YOLOv8 Models" – lighter aug saves resources while preventing memorization.
   - YouTube: deeplizard's "Deep Learning Model Capacity Explained" – big models excel in details but need strong data; cleaning counters risks.
 
-### Epoch 30 Metrics and What They Mean
-- **Snapshot at Epoch 30 (Early Training)**:
-  - Validation scores on unseen data; fitness (balanced overall) ~0.45-0.50.
-- **Box Metrics (Bounding Boxes Around Damages)**:
-  - Precision: 0.569 (56.9% predicted boxes correct; low false alarms).
-  - Recall: 0.45 (45% real damages found; room to improve detection).
-  - mAP@0.5: 0.476 (Avg. precision at 50% IoU/overlap; solid basics).
-  - mAP@0.5-95: 0.31 (Stricter avg. over 50-95% overlaps; needs finer tuning).
-- **Mask Metrics (Pixel-Level Segmentation)**:
-  - Precision: 0.561; Recall: 0.428; mAP@0.5: 0.444; mAP@0.5-95: 0.247.
-  - Masks lag boxes (pixels harder), but improving steadily.
-- **Comparison**: Builds on medium's end (~0.62 mAP); potential to surpass as capacity grows.
-
 ### Overall Explanation and Key Takeaways
 - **How Strategies Unlock Potential**: Thoughtful choices like fresh start avoid size mismatches, building damage knowledge from pre-trained base.
 - **Data Role**: Cleaning turns raw inputs into reliable foundation for subtle patterns (e.g., jagged edges).
