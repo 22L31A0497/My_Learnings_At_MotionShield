@@ -890,3 +890,198 @@ print("Avg latency (ms):", (time.time() - start) * 1000 / reps)
 - **YOLOv8:** access underlying PyTorch model via Ultralytics API, apply pruning, fine-tune via Ultralytics train loop.
 
 ---
+
+
+# 📚 Quantization Explained with PyTorch
+
+
+## 🧠 Overview
+
+Quantization is a model optimization technique that reduces memory usage and speeds up inference by converting floating-point numbers to integers. This video covers:
+
+- Why quantization is needed
+- Integer vs floating-point representation
+- Symmetric vs asymmetric quantization
+- Post-training quantization (PTQ)
+- Quantization-aware training (QAT)
+- PyTorch implementation from scratch
+
+---
+
+## 📌 Table of Contents
+
+1. [Introduction to Quantization](#introduction-to-quantization)
+2. [Numerical Representations](#numerical-representations)
+3. [Quantization in Neural Networks](#quantization-in-neural-networks)
+4. [Types of Quantization](#types-of-quantization)
+   - Symmetric
+   - Asymmetric
+5. [Quantization Formulas](#quantization-formulas)
+6. [Quantization Error](#quantization-error)
+7. [Granularity in Convolutional Layers](#granularity-in-convolutional-layers)
+8. [Post-Training Quantization (PTQ)](#post-training-quantization-ptq)
+9. [Quantization-Aware Training (QAT)](#quantization-aware-training-qat)
+10. [Gradient Approximation](#gradient-approximation)
+11. [Choosing Alpha and Beta](#choosing-alpha-and-beta)
+12. [GPU Acceleration](#gpu-acceleration)
+13. [Code Walkthroughs](#code-walkthroughs)
+
+---
+
+## 🧮 Introduction to Quantization
+
+- Deep neural networks have billions of parameters.
+- Storing and loading models requires large memory (e.g., LLaMA 2 with 7B params = 28GB at 32-bit).
+- CPUs/GPUs are faster with integer operations than floating-point.
+- Quantization reduces model size and speeds up inference.
+
+---
+
+## 🔢 Numerical Representations
+
+### Integers
+- Represented using fixed bits (e.g., 8-bit = 256 values).
+- Two’s complement used for signed integers.
+
+### Floating Point
+- IEEE 754 standard: 32-bit = sign (1) + exponent (8) + fraction (23).
+- 16-bit floats = less precision.
+
+---
+
+## 🧠 Quantization in Neural Networks
+
+- Replace float weights/biases with integers.
+- Perform integer matrix multiplication.
+- Dequantize output before passing to next layer.
+- Goal: maintain model accuracy while reducing size and compute.
+
+---
+
+## 🧭 Types of Quantization
+
+### 🔁 Symmetric Quantization
+- Maps range [-α, +α] to [-127, +127].
+- Zero maps to zero.
+- Simpler, but less flexible.
+
+### 🔀 Asymmetric Quantization
+- Maps [β, α] to [0, 255].
+- Zero maps to offset (Z).
+- More accurate for non-symmetric data.
+
+---
+
+## 🧮 Quantization Formulas
+
+### Asymmetric
+```python
+q = round(x / s) + z
+s = (α - β) / (2ⁿ - 1)
+z = round(-β / s)
+```
+
+### Symmetric
+```python
+q = clamp(round(x / s), -2ⁿ⁻¹, 2ⁿ⁻¹ - 1)
+s = |α|
+```
+
+### Dequantization
+```python
+x = s * (q - z)  # Asymmetric
+x = s * q        # Symmetric
+```
+
+---
+
+## ⚠️ Quantization Error
+
+- Dequantized values ≠ original values.
+- Error depends on:
+  - Bit-width (8-bit vs 16-bit)
+  - Distribution of values
+  - Choice of α and β
+
+---
+
+## 🧱 Granularity in Convolutional Layers
+
+- Channel-wise quantization improves accuracy.
+- Each kernel gets its own α and β.
+- Avoids wasted range in shared quantization.
+
+---
+
+## 🧪 Post-Training Quantization (PTQ)
+
+- Use pre-trained model + unlabeled data.
+- Run inference to collect min/max stats.
+- Apply quantization using PyTorch observers.
+- Accuracy drop is minimal if done well.
+
+---
+
+## 🧠 Quantization-Aware Training (QAT)
+
+- Insert fake quant/dequant ops during training.
+- Simulates quantization error.
+- Model learns to be robust to quantization.
+- Requires gradient approximation.
+
+---
+
+## 📉 Gradient Approximation
+
+- Quantization is non-differentiable.
+- Use Straight-Through Estimator (STE):
+  - Gradient = 1 inside range
+  - Gradient = 0 outside range
+
+---
+
+## 🎯 Choosing Alpha and Beta
+
+### Strategies:
+- Min-Max: sensitive to outliers
+- Percentile: ignores outliers
+- MSE: minimizes mean squared error
+- Cross-Entropy: preserves softmax distribution
+
+---
+
+## 🚀 GPU Acceleration
+
+- Matrix multiplication uses Multiply-Accumulate blocks.
+- Quantized inputs (8-bit) → Accumulator (32-bit).
+- Bias added in accumulator.
+- Parallelized across rows/columns.
+
+---
+
+## 💻 Code Walkthroughs
+
+### From Scratch
+- Generate random tensor
+- Apply symmetric/asymmetric quantization
+- Measure quantization error
+
+### PTQ in PyTorch
+- Train MNIST model
+- Insert observers
+- Calibrate with test data
+- Convert to quantized model
+
+### QAT in PyTorch
+- Define quant-ready model
+- Insert fake quant ops
+- Train with quantization simulation
+- Convert to final quantized model
+
+---
+
+## ✅ Summary
+
+Quantization is essential for deploying models on edge devices and optimizing performance. PyTorch provides tools for both PTQ and QAT, and understanding the math behind quantization helps in customizing and improving model accuracy.
+
+---
