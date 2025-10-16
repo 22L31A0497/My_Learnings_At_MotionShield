@@ -115,4 +115,101 @@
 - Selects a region of interest (ROI) using array slicing.
 - Useful for focusing on specific parts of an image.
 
+
+## 🔄 1. Image Transformations
+
+### ✈️ Translation (Shifting Images)
+- Moves the image along the X and/or Y axis.
+- Positive X → right, Negative X → left.
+- Positive Y → down, Negative Y → up.
+- Useful for aligning or repositioning objects in an image.
+
+### 🔁 Rotation
+- Rotates the image around a point (usually the center).
+- Angle can be positive (counterclockwise) or negative (clockwise).
+- Can rotate around any custom point, not just the center.
+
+### 📐 Resizing
+- Changes the dimensions of the image.
+- Can shrink or enlarge.
+- Interpolation methods:
+  - `INTER_AREA`: Best for shrinking.
+  - `INTER_LINEAR` / `INTER_CUBIC`: Better for enlarging (cubic is higher quality but slower).
+
+### 🔄 Flipping
+- Flips the image:
+  - Vertically (over X-axis)
+  - Horizontally (over Y-axis)
+  - Both (X and Y)
+
+### ✂️ Cropping
+- Extracts a region of interest (ROI) from the image.
+- Done using pixel slicing (like array slicing).
+
+---
+
+## 🧭 2. Contour Detection
+
+### 🧱 What Are Contours?
+- Contours are curves that join continuous points along the boundary of an object.
+- Think of them as outlines or edges of shapes.
+
+### 🧠 Why Use Contours?
+- Essential for:
+  - Shape analysis
+  - Object detection
+  - Image segmentation
+
+### 🧰 How Contours Are Found
+- Convert image to grayscale.
+- Apply edge detection (e.g., Canny).
+- Use `findContours()` to extract contour points.
+
+### 🧪 Contour Modes
+- `RETR_LIST`: Retrieves all contours.
+- `RETR_EXTERNAL`: Only outermost contours.
+- `RETR_TREE`: Retrieves all with hierarchy info.
+
+### 🧱 Contour Approximation
+- `CHAIN_APPROX_NONE`: Stores all contour points.
+- `CHAIN_APPROX_SIMPLE`: Compresses points (e.g., a line becomes just 2 endpoints).
+
+---
+
+## 🧼 3. Preprocessing for Contours
+
+### 🌫️ Blurring Before Contour Detection
+- Reduces noise and small details.
+- Helps in detecting cleaner, fewer contours.
+
+### ⚫ Thresholding (Alternative to Canny)
+- Converts grayscale image to binary (black & white).
+- Pixels above a threshold → white; below → black.
+- Simpler than Canny but less flexible.
+
+---
+
+## 🖍️ 4. Drawing Contours
+
+### 🧾 Visualizing Contours
+- Contours can be drawn on:
+  - Original image
+  - Blank canvas (for clarity)
+- Helps in debugging and understanding object boundaries.
+
+---
+
+## 🧠 Summary of Concepts Covered (30–60 min)
+
+| Concept             | Purpose / Use Case                              |
+|---------------------|--------------------------------------------------|
+| Translation         | Move image position                             |
+| Rotation            | Rotate image around a point                     |
+| Resizing            | Shrink/enlarge image                            |
+| Flipping            | Mirror image across axes                        |
+| Cropping            | Focus on a region of interest                   |
+| Contours            | Detect object boundaries                        |
+| Blurring            | Reduce noise before edge/contour detection      |
+| Thresholding        | Binarize image for simpler contour detection    |
+
 ---
