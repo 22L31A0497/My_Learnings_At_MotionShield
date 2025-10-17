@@ -306,3 +306,123 @@
 | Histogram Equalization | Improve image contrast                          |
 
 ---
+
+
+## 🚪 5. Thresholding
+
+### 🧠 What is Thresholding?
+- Converts grayscale image to binary (black & white) based on intensity.
+
+### 🧪 Basic Thresholding
+```python
+ret, thresh = cv.threshold(gray, 150, 255, cv.THRESH_BINARY)
+```
+
+### 🧪 Inverse Thresholding
+```python
+ret, thresh_inv = cv.threshold(gray, 150, 255, cv.THRESH_BINARY_INV)
+```
+
+---
+
+## 🧠 6. Adaptive Thresholding
+
+### 🧪 Adaptive Mean & Gaussian
+```python
+adaptive_mean = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_MEAN_C,
+                                     cv.THRESH_BINARY, 11, 3)
+adaptive_gauss = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                      cv.THRESH_BINARY, 11, 3)
+```
+
+---
+
+## ✂️ 7. Edge Detection
+
+### 🧠 Canny Edge Detection
+```python
+edges = cv.Canny(img, threshold1=125, threshold2=175)
+```
+
+### 🧪 Improve with Blur
+```python
+blurred = cv.GaussianBlur(img, (5, 5), cv.BORDER_DEFAULT)
+edges = cv.Canny(blurred, 125, 175)
+```
+
+---
+
+## 🧱 8. Dilation & Erosion
+
+### 🧪 Dilation
+```python
+dilated = cv.dilate(edges, (3, 3), iterations=1)
+```
+
+### 🧪 Erosion
+```python
+eroded = cv.erode(dilated, (3, 3), iterations=1)
+```
+
+---
+
+## 🧬 9. Face Detection
+
+### 🧠 Using Haar Cascades
+- Pre-trained XML classifiers for face detection.
+
+### 🧪 Load and Detect
+```python
+face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
+gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3)
+```
+
+### 🧪 Draw Rectangles
+```python
+for (x, y, w, h) in faces:
+    cv.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), thickness=2)
+```
+
+---
+
+## 🧠 10. Face Recognition (Intro)
+
+### 🧪 Using LBPH Recognizer
+```python
+recognizer = cv.face.LBPHFaceRecognizer_create()
+recognizer.train(faces, labels)
+recognizer.save('model.yml')
+```
+
+### 🧪 Predict
+```python
+label, confidence = recognizer.predict(test_face)
+```
+
+---
+
+## 🧠 11. Final Project: Simpsons Character Classifier
+
+### 🧪 Deep Learning Model
+- Uses CNN to classify characters from The Simpsons.
+- Dataset: Images of characters.
+- Tools: OpenCV + custom utility package `seer`
+
+---
+
+## 📌 Summary
+
+| Concept              | Purpose                          | Key Function                  |
+|----------------------|----------------------------------|-------------------------------|
+| Color Spaces         | Change how colors are represented| `cv.cvtColor()`               |
+| Bitwise Ops          | Combine or isolate images        | `cv.bitwise_and()` etc.       |
+| Masking              | Focus on part of image           | `cv.bitwise_and()` + mask     |
+| Histograms           | Analyze pixel intensity          | `cv.calcHist()`               |
+| Thresholding         | Convert to binary image          | `cv.threshold()`              |
+| Edge Detection       | Find outlines                    | `cv.Canny()`                  |
+| Dilation/Erosion     | Thicken/thin edges               | `cv.dilate()`, `cv.erode()`   |
+| Face Detection       | Find faces in image              | `CascadeClassifier`           |
+| Face Recognition     | Identify known faces             | `LBPHFaceRecognizer`          |
+
+---
